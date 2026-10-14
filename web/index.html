@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1a0f24" />
+  <title>电子生日蜡烛 · eCandle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <canvas id="fx-canvas" aria-hidden="true"></canvas>
+
+  <main class="app">
+    <header class="header">
+      <h1>电子生日蜡烛</h1>
+      <p class="tagline">没有打火机？点这里。对着手机吹气，蜡烛会灭。</p>
+    </header>
+
+    <section class="controls panel" aria-label="设置">
+      <div class="control-row">
+        <span class="label">蜡烛样式</span>
+        <div class="segmented" role="tablist">
+          <button type="button" class="seg active" data-mode="count" role="tab" aria-selected="true">多根蜡烛</button>
+          <button type="button" class="seg" data-mode="digits" role="tab" aria-selected="false">数字蜡烛</button>
+        </div>
+      </div>
+
+      <div class="control-row mode-count">
+        <label for="candle-count">数量 <output id="count-out">5</output></label>
+        <input id="candle-count" type="range" min="1" max="20" value="5" />
+      </div>
+
+      <div class="control-row mode-digits hidden">
+        <label for="age-input">年龄（数字蜡烛）</label>
+        <input id="age-input" type="number" min="0" max="99" value="18" inputmode="numeric" />
+      </div>
+
+      <div class="control-row toggles">
+        <label class="switch">
+          <input type="checkbox" id="music-toggle" checked />
+          <span class="slider"></span>
+          <span class="switch-label">背景音乐（生日快乐）</span>
+        </label>
+      </div>
+
+      <div class="control-row actions">
+        <button type="button" id="btn-light" class="btn primary">点燃蜡烛</button>
+        <button type="button" id="btn-reset" class="btn ghost">重新布置</button>
+        <button type="button" id="btn-mic" class="btn accent">开启吹气（麦克风）</button>
+      </div>
+
+      <p id="mic-hint" class="hint">吹气需授权麦克风。在安静环境对着麦克风吹，音量条升高时会熄灭火焰。</p>
+      <div class="meter-wrap hidden" id="meter-wrap">
+        <span class="meter-label">吹气强度</span>
+        <div class="meter"><div id="meter-fill"></div></div>
+      </div>
+    </section>
+
+    <section class="stage" aria-label="生日蛋糕">
+      <div class="cake-scene" id="cake-scene">
+        <div class="plate"></div>
+        <div class="cake">
+          <div class="frosting"></div>
+          <div class="cake-body"></div>
+        </div>
+        <div class="candles" id="candles" role="list"></div>
+      </div>
+      <p class="status" id="status" live="polite">先设置蜡烛，再点击「点燃蜡烛」</p>
+    </section>
+  </main>
+
+  <div id="celebration" class="celebration hidden" aria-hidden="true">
+    <div class="celebration-inner">
+      <p class="cele-title">生日快乐！</p>
+      <p class="cele-sub">愿望已经藏进星星里啦 ✨</p>
+    </div>
+  </div>
+
+  <script src="js/app.js" type="module"></script>
+</body>
+</html>

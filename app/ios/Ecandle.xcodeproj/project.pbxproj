@@ -1,0 +1,323 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EC0A00000000000000000001 /* EcandleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B00000000000000000001 /* EcandleApp.swift */; };
+		EC0A00000000000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B00000000000000000002 /* ContentView.swift */; };
+		EC0A00000000000000000003 /* ControlsPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B00000000000000000003 /* ControlsPanel.swift */; };
+		EC0A00000000000000000004 /* CakeSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B00000000000000000004 /* CakeSceneView.swift */; };
+		EC0A00000000000000000005 /* CandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B00000000000000000005 /* CandleView.swift */; };
+		EC0A00000000000000000006 /* CelebrationOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B00000000000000000006 /* CelebrationOverlay.swift */; };
+		EC0A00000000000000000007 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B00000000000000000007 /* ConfettiView.swift */; };
+		EC0A00000000000000000008 /* CandleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B00000000000000000008 /* CandleViewModel.swift */; };
+		EC0A00000000000000000009 /* BlowDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B00000000000000000009 /* BlowDetector.swift */; };
+		EC0A0000000000000000000A /* BirthdayMusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B0000000000000000000A /* BirthdayMusicPlayer.swift */; };
+		EC0A0000000000000000000B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC0B0000000000000000000B /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		EC0B00000000000000000001 /* EcandleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcandleApp.swift; sourceTree = "<group>"; };
+		EC0B00000000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		EC0B00000000000000000003 /* ControlsPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsPanel.swift; sourceTree = "<group>"; };
+		EC0B00000000000000000004 /* CakeSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeSceneView.swift; sourceTree = "<group>"; };
+		EC0B00000000000000000005 /* CandleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandleView.swift; sourceTree = "<group>"; };
+		EC0B00000000000000000006 /* CelebrationOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrationOverlay.swift; sourceTree = "<group>"; };
+		EC0B00000000000000000007 /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
+		EC0B00000000000000000008 /* CandleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandleViewModel.swift; sourceTree = "<group>"; };
+		EC0B00000000000000000009 /* BlowDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlowDetector.swift; sourceTree = "<group>"; };
+		EC0B0000000000000000000A /* BirthdayMusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayMusicPlayer.swift; sourceTree = "<group>"; };
+		EC0B0000000000000000000B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EC0B0000000000000000000C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC0C00000000000000000001 /* Ecandle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ecandle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EC0D00000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EC0E00000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				EC0E00000000000000000002 /* Ecandle */,
+				EC0E00000000000000000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EC0E00000000000000000002 /* Ecandle */ = {
+			isa = PBXGroup;
+			children = (
+				EC0B00000000000000000001 /* EcandleApp.swift */,
+				EC0E00000000000000000004 /* Views */,
+				EC0E00000000000000000005 /* ViewModels */,
+				EC0E00000000000000000006 /* Services */,
+				EC0B0000000000000000000B /* Assets.xcassets */,
+				EC0B0000000000000000000C /* Info.plist */,
+			);
+			path = Ecandle;
+			sourceTree = "<group>";
+		};
+		EC0E00000000000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC0C00000000000000000001 /* Ecandle.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EC0E00000000000000000004 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EC0B00000000000000000002 /* ContentView.swift */,
+				EC0B00000000000000000003 /* ControlsPanel.swift */,
+				EC0B00000000000000000004 /* CakeSceneView.swift */,
+				EC0B00000000000000000005 /* CandleView.swift */,
+				EC0B00000000000000000006 /* CelebrationOverlay.swift */,
+				EC0B00000000000000000007 /* ConfettiView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EC0E00000000000000000005 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				EC0B00000000000000000008 /* CandleViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EC0E00000000000000000006 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EC0B00000000000000000009 /* BlowDetector.swift */,
+				EC0B0000000000000000000A /* BirthdayMusicPlayer.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EC0F00000000000000000001 /* Ecandle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC1000000000000000000003 /* Build configuration list for PBXNativeTarget "Ecandle" */;
+			buildPhases = (
+				EC0F00000000000000000002 /* Sources */,
+				EC0D00000000000000000001 /* Frameworks */,
+				EC0F00000000000000000003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Ecandle;
+			productName = Ecandle;
+			productReference = EC0C00000000000000000001 /* Ecandle.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EC1100000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					EC0F00000000000000000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = EC1000000000000000000001 /* Build configuration list for PBXProject "Ecandle" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = "zh-Hans";
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = EC0E00000000000000000001;
+			productRefGroup = EC0E00000000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EC0F00000000000000000001 /* Ecandle */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EC0F00000000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC0A0000000000000000000B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EC0F00000000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC0A00000000000000000001 /* EcandleApp.swift in Sources */,
+				EC0A00000000000000000002 /* ContentView.swift in Sources */,
+				EC0A00000000000000000003 /* ControlsPanel.swift in Sources */,
+				EC0A00000000000000000004 /* CakeSceneView.swift in Sources */,
+				EC0A00000000000000000005 /* CandleView.swift in Sources */,
+				EC0A00000000000000000006 /* CelebrationOverlay.swift in Sources */,
+				EC0A00000000000000000007 /* ConfettiView.swift in Sources */,
+				EC0A00000000000000000008 /* CandleViewModel.swift in Sources */,
+				EC0A00000000000000000009 /* BlowDetector.swift in Sources */,
+				EC0A0000000000000000000A /* BirthdayMusicPlayer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		EC1200000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		EC1200000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EC1200000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Ecandle/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "电子蜡烛";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecandle.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EC1200000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Ecandle/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "电子蜡烛";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecandle.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EC1000000000000000000001 /* Build configuration list for PBXProject "Ecandle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC1200000000000000000001 /* Debug */,
+				EC1200000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC1000000000000000000003 /* Build configuration list for PBXNativeTarget "Ecandle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC1200000000000000000003 /* Debug */,
+				EC1200000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EC1100000000000000000001 /* Project object */;
+}
