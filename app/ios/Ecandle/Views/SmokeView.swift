@@ -32,9 +32,8 @@ struct SmokeView: View {
                     }
                 }
             }
-            .frame(width: 36, height: 48)
         }
-        .frame(width: 36, height: 48)
+        .frame(width: 14, height: 48)
         .allowsHitTesting(false)
         .onChange(of: token) { _, _ in
             play()
@@ -50,7 +49,7 @@ struct SmokeView: View {
         let now = Date.timeIntervalSinceReferenceDate
         particles = (0..<7).map { _ in
             SmokeParticle(
-                origin: CGPoint(x: CGFloat.random(in: 14...22), y: 40),
+                origin: CGPoint(x: CGFloat.random(in: 4...10), y: 40),
                 drift: CGFloat.random(in: -8...8),
                 rise: CGFloat.random(in: 22...38),
                 size: CGFloat.random(in: 4...8),

@@ -87,12 +87,15 @@ struct ControlsPanel: View {
                     BlowLevelBar(level: viewModel.blowLevel)
                 }
             } else {
-                Text("吹气需授权麦克风。安静环境下对着底部麦克风吹，强度条升高时会熄灭火焰。开启吹气后设置会自动收起，轻点屏幕或右上角按钮可再打开。")
+                Text("吹气需授权麦克风。安静环境下对着底部麦克风吹，强度条升高时会熄灭火焰。点燃或开启吹气后设置会自动收起，轻点屏幕或右上角按钮可再打开。")
                     .font(.caption)
                     .foregroundStyle(.white.opacity(0.55))
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
         .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 16))
         .overlay(
             RoundedRectangle(cornerRadius: 16)

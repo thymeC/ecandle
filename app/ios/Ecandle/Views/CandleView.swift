@@ -2,6 +2,12 @@ import SwiftUI
 
 struct CandleView: View {
     let candle: CandleItem
+    /// Optional uniform scale when many candles must fit on the cake.
+    var scale: CGFloat = 1
+
+    private var bodyWidth: CGFloat {
+        candle.isDigit ? 28 : 10
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -20,7 +26,8 @@ struct CandleView: View {
                         )
                 }
             }
-            .frame(height: 36)
+            // Fixed layout width so lit flame halos cannot inflate HStack / ScrollView.
+            .frame(width: bodyWidth, height: 36)
 
             Rectangle()
                 .fill(Color.black.opacity(0.85))
@@ -31,7 +38,7 @@ struct CandleView: View {
                 Text(label)
                     .font(.title2.bold())
                     .foregroundStyle(.white.opacity(candle.isOut ? 0.55 : 1))
-                    .frame(minWidth: 28, minHeight: 48)
+                    .frame(width: 28, height: 48)
                     .background(
                         LinearGradient(
                             colors: [
@@ -60,6 +67,9 @@ struct CandleView: View {
                     .frame(width: 10, height: 42)
             }
         }
+        .frame(width: bodyWidth)
+        .scaleEffect(scale, anchor: .bottom)
+        .frame(width: bodyWidth * scale, height: nil, alignment: .bottom)
         .animation(.easeInOut(duration: 0.4), value: candle.isLit)
         .animation(.easeInOut(duration: 0.45), value: candle.isOut)
     }
