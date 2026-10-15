@@ -21,6 +21,7 @@ struct ContentView: View {
             ConfettiView(isActive: viewModel.showCelebration)
                 .allowsHitTesting(false)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .animation(.easeInOut(duration: 0.35), value: viewModel.isSettingsExpanded)
         .animation(.spring(duration: 0.5), value: viewModel.showCelebration)
         .statusBarHidden(viewModel.isImmersive)
@@ -34,7 +35,7 @@ struct ContentView: View {
     }
 
     private var setupLayout: some View {
-        ScrollView {
+        ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 20) {
                 header
                 ControlsPanel(viewModel: viewModel) {
@@ -51,16 +52,17 @@ struct ContentView: View {
                     .font(.subheadline)
                     .foregroundStyle(.white.opacity(0.65))
                     .multilineTextAlignment(.center)
-                    .padding(.horizontal)
+                    .frame(maxWidth: .infinity)
             }
             .padding(.vertical, 24)
             .padding(.horizontal, 16)
+            .frame(maxWidth: .infinity)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     private var immersiveLayout: some View {
         ZStack {
-            // Tap empty space to reveal settings — candles keep their own taps.
             Color.clear
                 .contentShape(Rectangle())
                 .onTapGesture {
@@ -70,18 +72,20 @@ struct ContentView: View {
                 }
 
             VStack {
-                Spacer()
+                Spacer(minLength: 0)
                 CakeSceneView(
                     candles: viewModel.candles,
                     immersive: true,
                     onTapCandle: { viewModel.toggleLight($0) }
                 )
-                Spacer()
+                Spacer(minLength: 0)
             }
+            .frame(maxWidth: .infinity)
             .allowsHitTesting(true)
 
             ImmersiveChrome(viewModel: viewModel)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     private var header: some View {
@@ -92,7 +96,9 @@ struct ContentView: View {
                 .font(.subheadline)
                 .foregroundStyle(.white.opacity(0.65))
                 .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
         }
+        .frame(maxWidth: .infinity)
     }
 }
 

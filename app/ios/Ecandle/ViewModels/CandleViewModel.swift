@@ -70,7 +70,8 @@ final class CandleViewModel: ObservableObject {
         syncMusic()
         refreshIdleTimer()
         updateStatus()
-        if micEnabled {
+        // Immersive after lighting — cake fills the room; settings reopen via tap / chrome.
+        if didLight || litCount > 0 {
             collapseSettingsForBlow()
         }
     }
