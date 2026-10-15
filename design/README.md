@@ -6,5 +6,6 @@
 
 - `app_icon_1024.png` — App Store / 门户卡片图标
 - `app-store/marketing/` — 截图（可选）
+- `immersive-preview/` — SwiftUI 沉浸/设置态静态视觉预览（非模拟器）
 
 digital-life 清单见：`digital-life-from-scratch/scripts/sync-media.mjs` 中的 `ecandle` 条目。

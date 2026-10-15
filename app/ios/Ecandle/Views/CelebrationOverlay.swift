@@ -16,12 +16,11 @@ struct CelebrationOverlay: View {
                             endPoint: .bottomTrailing
                         )
                     )
-                Text("愿望已经藏进星星里啦 ✨")
+                Text("愿望已经藏进星星里啦")
                     .font(.title3)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.white.opacity(0.9))
             }
             .padding(32)
-            .scaleEffect(1)
         }
     }
 }
