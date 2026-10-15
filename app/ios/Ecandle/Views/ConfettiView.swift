@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct ConfettiView: View {
     let isActive: Bool

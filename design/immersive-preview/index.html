@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>eCandle · Immersive UI Preview</title>
+  <link rel="stylesheet" href="preview.css" />
+</head>
+<body>
+  <div class="stage">
+    <p class="caption">SwiftUI 视觉预览（非模拟器）· 设置展开 / 吹烛沉浸</p>
+    <div class="phones">
+      <!-- Setup -->
+      <figure class="phone" id="phone-setup" data-label="设置展开">
+        <div class="phone-screen setup">
+          <div class="atmosphere" data-glow="0.2"></div>
+          <div class="scroll">
+            <header>
+              <h1>电子生日蜡烛</h1>
+              <p>没有打火机？点这里。对着 iPhone 吹气，蜡烛会灭。</p>
+            </header>
+            <section class="panel">
+              <div class="panel-head">
+                <span>蜡烛样式</span>
+                <button class="icon-btn" aria-label="收起">⌄</button>
+              </div>
+              <div class="segmented">
+                <span class="active">多根蜡烛</span>
+                <span>数字蜡烛</span>
+              </div>
+              <div class="row">数量 5 <input type="range" min="1" max="20" value="5" disabled /></div>
+              <label class="toggle"><span>背景音乐（生日快乐）</span><i class="on"></i></label>
+              <label class="toggle"><span>柔和音效</span><i></i></label>
+              <div class="actions">
+                <button class="primary">点燃蜡烛</button>
+                <button class="ghost">重新布置</button>
+              </div>
+              <button class="accent">开启吹气（麦克风）</button>
+              <p class="hint">开启吹气后设置会自动收起，轻点屏幕或右上角按钮可再打开。</p>
+            </section>
+            <div class="cake-scene">
+              <div class="glow-pool"></div>
+              <div class="candles">
+                <div class="candle lit"><span class="flame"></span><span class="wick"></span><span class="body"></span></div>
+                <div class="candle lit"><span class="flame"></span><span class="wick"></span><span class="body"></span></div>
+                <div class="candle"><span class="wick"></span><span class="body"></span></div>
+                <div class="candle"><span class="wick"></span><span class="body"></span></div>
+                <div class="candle"><span class="wick"></span><span class="body"></span></div>
+              </div>
+              <div class="cake">
+                <div class="frosting"></div>
+                <div class="layer"></div>
+              </div>
+              <div class="plate"></div>
+            </div>
+            <p class="status">已点燃 2/5 根，继续点蜡烛或一键点燃</p>
+          </div>
+        </div>
+        <figcaption>设置展开</figcaption>
+      </figure>
+
+      <!-- Immersive -->
+      <figure class="phone" id="phone-immersive" data-label="吹烛沉浸">
+        <div class="phone-screen immersive">
+          <div class="atmosphere" data-glow="1"></div>
+          <button class="settings-fab" aria-label="打开设置">☰</button>
+          <div class="cake-scene large">
+            <div class="glow-pool strong"></div>
+            <div class="candles">
+              <div class="candle lit"><span class="flame sway"></span><span class="wick"></span><span class="body"></span></div>
+              <div class="candle lit"><span class="flame sway d2"></span><span class="wick"></span><span class="body"></span></div>
+              <div class="candle lit"><span class="flame sway d3"></span><span class="wick"></span><span class="body"></span></div>
+              <div class="candle lit"><span class="flame sway d4"></span><span class="wick"></span><span class="body"></span></div>
+              <div class="candle lit"><span class="flame sway d5"></span><span class="wick"></span><span class="body"></span></div>
+            </div>
+            <div class="cake">
+              <div class="frosting"></div>
+              <div class="layer"></div>
+            </div>
+            <div class="plate"></div>
+          </div>
+          <div class="immersive-footer">
+            <div class="blow-bar"><i style="width:18%"></i></div>
+            <p>对着麦克风吹气，吹灭蜡烛吧！</p>
+          </div>
+        </div>
+        <figcaption>吹烛沉浸（设置收起）</figcaption>
+      </figure>
+    </div>
+  </div>
+</body>
+</html>

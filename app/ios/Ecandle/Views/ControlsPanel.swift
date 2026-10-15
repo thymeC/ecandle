@@ -2,12 +2,28 @@ import SwiftUI
 
 struct ControlsPanel: View {
     @ObservedObject var viewModel: CandleViewModel
+    var onCollapse: (() -> Void)?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
-            Text("蜡烛样式")
-                .font(.caption)
-                .foregroundStyle(.white.opacity(0.6))
+            HStack {
+                Text("蜡烛样式")
+                    .font(.caption)
+                    .foregroundStyle(.white.opacity(0.6))
+                Spacer()
+                if let onCollapse {
+                    Button {
+                        onCollapse()
+                    } label: {
+                        Image(systemName: "chevron.down")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(.white.opacity(0.55))
+                            .padding(6)
+                            .background(.white.opacity(0.08), in: Circle())
+                    }
+                    .accessibilityLabel("收起设置")
+                }
+            }
 
             Picker("蜡烛样式", selection: $viewModel.mode) {
                 ForEach(CandleLayoutMode.allCases) { mode in
@@ -40,6 +56,12 @@ struct ControlsPanel: View {
             ))
             .tint(Color(red: 1, green: 0.42, blue: 0.62))
 
+            Toggle("柔和音效", isOn: Binding(
+                get: { viewModel.softSoundEnabled },
+                set: { viewModel.setSoftSoundEnabled($0) }
+            ))
+            .tint(Color(red: 1, green: 0.62, blue: 0.35))
+
             HStack(spacing: 10) {
                 Button("点燃蜡烛") {
                     viewModel.lightAll()
@@ -62,25 +84,10 @@ struct ControlsPanel: View {
                     Text("吹气强度")
                         .font(.caption2)
                         .foregroundStyle(.white.opacity(0.55))
-                    GeometryReader { geo in
-                        ZStack(alignment: .leading) {
-                            Capsule()
-                                .fill(Color.black.opacity(0.35))
-                            Capsule()
-                                .fill(
-                                    LinearGradient(
-                                        colors: [.mint, .yellow, .pink],
-                                        startPoint: .leading,
-                                        endPoint: .trailing
-                                    )
-                                )
-                                .frame(width: geo.size.width * viewModel.blowLevel)
-                        }
-                    }
-                    .frame(height: 8)
+                    BlowLevelBar(level: viewModel.blowLevel)
                 }
             } else {
-                Text("吹气需授权麦克风。安静环境下对着底部麦克风吹，强度条升高时会熄灭火焰。")
+                Text("吹气需授权麦克风。安静环境下对着底部麦克风吹，强度条升高时会熄灭火焰。开启吹气后设置会自动收起，轻点屏幕或右上角按钮可再打开。")
                     .font(.caption)
                     .foregroundStyle(.white.opacity(0.55))
             }
@@ -94,51 +101,25 @@ struct ControlsPanel: View {
     }
 }
 
-struct PrimaryButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .font(.subheadline.bold())
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 10)
-            .background(
-                LinearGradient(colors: [Color.orange, Color.red.opacity(0.85)], startPoint: .topLeading, endPoint: .bottomTrailing),
-                in: Capsule()
-            )
-            .foregroundStyle(Color(red: 0.1, green: 0.04, blue: 0.03))
-            .opacity(configuration.isPressed ? 0.85 : 1)
-    }
-}
+struct BlowLevelBar: View {
+    var level: Double
 
-struct GhostButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .font(.subheadline.bold())
-            .padding(.horizontal, 14)
-            .padding(.vertical, 10)
-            .background(.white.opacity(0.08), in: Capsule())
-            .overlay(Capsule().stroke(.white.opacity(0.15)))
-            .foregroundStyle(.white)
-            .opacity(configuration.isPressed ? 0.85 : 1)
-    }
-}
-
-struct AccentButtonStyle: ButtonStyle {
-    var isActive: Bool
-
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .font(.subheadline.bold())
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 11)
-            .background(
-                LinearGradient(colors: [Color.purple, Color.pink], startPoint: .leading, endPoint: .trailing),
-                in: Capsule()
-            )
-            .foregroundStyle(.white)
-            .overlay(
+    var body: some View {
+        GeometryReader { geo in
+            ZStack(alignment: .leading) {
                 Capsule()
-                    .stroke(isActive ? Color.white.opacity(0.5) : .clear, lineWidth: 2)
-            )
-            .opacity(configuration.isPressed ? 0.85 : 1)
+                    .fill(Color.black.opacity(0.35))
+                Capsule()
+                    .fill(
+                        LinearGradient(
+                            colors: [.mint, .yellow, .pink],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+                    .frame(width: geo.size.width * level)
+            }
+        }
+        .frame(height: 8)
     }
 }

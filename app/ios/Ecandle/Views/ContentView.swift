@@ -5,24 +5,12 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            backgroundGradient
+            AtmosphereBackground(glowStrength: viewModel.glowStrength)
 
-            ScrollView {
-                VStack(spacing: 20) {
-                    header
-                    ControlsPanel(viewModel: viewModel)
-                    CakeSceneView(
-                        candles: viewModel.candles,
-                        onTapCandle: { viewModel.toggleLight($0) }
-                    )
-                    Text(viewModel.statusMessage)
-                        .font(.subheadline)
-                        .foregroundStyle(.white.opacity(0.65))
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
-                }
-                .padding(.vertical, 24)
-                .padding(.horizontal, 16)
+            if viewModel.isImmersive {
+                immersiveLayout
+            } else {
+                setupLayout
             }
 
             if viewModel.showCelebration {
@@ -33,7 +21,9 @@ struct ContentView: View {
             ConfettiView(isActive: viewModel.showCelebration)
                 .allowsHitTesting(false)
         }
+        .animation(.easeInOut(duration: 0.35), value: viewModel.isSettingsExpanded)
         .animation(.spring(duration: 0.5), value: viewModel.showCelebration)
+        .statusBarHidden(viewModel.isImmersive)
         .onChange(of: viewModel.mode) { _, _ in viewModel.rebuildCandles() }
         .onChange(of: viewModel.candleCount) { _, _ in
             if viewModel.mode == .count { viewModel.rebuildCandles() }
@@ -43,13 +33,55 @@ struct ContentView: View {
         }
     }
 
-    private var backgroundGradient: some View {
-        LinearGradient(
-            colors: [Color(red: 0.16, green: 0.08, blue: 0.22), Color(red: 0.07, green: 0.04, blue: 0.1)],
-            startPoint: .top,
-            endPoint: .bottom
-        )
-        .ignoresSafeArea()
+    private var setupLayout: some View {
+        ScrollView {
+            VStack(spacing: 20) {
+                header
+                ControlsPanel(viewModel: viewModel) {
+                    withAnimation(.easeInOut(duration: 0.28)) {
+                        viewModel.collapseSettingsForBlow()
+                    }
+                }
+                CakeSceneView(
+                    candles: viewModel.candles,
+                    immersive: false,
+                    onTapCandle: { viewModel.toggleLight($0) }
+                )
+                Text(viewModel.statusMessage)
+                    .font(.subheadline)
+                    .foregroundStyle(.white.opacity(0.65))
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+            }
+            .padding(.vertical, 24)
+            .padding(.horizontal, 16)
+        }
+    }
+
+    private var immersiveLayout: some View {
+        ZStack {
+            // Tap empty space to reveal settings — candles keep their own taps.
+            Color.clear
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 0.28)) {
+                        viewModel.expandSettings()
+                    }
+                }
+
+            VStack {
+                Spacer()
+                CakeSceneView(
+                    candles: viewModel.candles,
+                    immersive: true,
+                    onTapCandle: { viewModel.toggleLight($0) }
+                )
+                Spacer()
+            }
+            .allowsHitTesting(true)
+
+            ImmersiveChrome(viewModel: viewModel)
+        }
     }
 
     private var header: some View {

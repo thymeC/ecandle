@@ -18,6 +18,15 @@
 		EC0A00000000000000000009 /* BlowDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B00000000000000000009 /* BlowDetector.swift */; };
 		EC0A0000000000000000000A /* BirthdayMusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B0000000000000000000A /* BirthdayMusicPlayer.swift */; };
 		EC0A0000000000000000000B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC0B0000000000000000000B /* Assets.xcassets */; };
+		EC0A0000000000000000000C /* CandleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B0000000000000000000D /* CandleItem.swift */; };
+		EC0A0000000000000000000D /* CandleLayoutMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B0000000000000000000E /* CandleLayoutMode.swift */; };
+		EC0A0000000000000000000E /* AtmosphereBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B0000000000000000000F /* AtmosphereBackground.swift */; };
+		EC0A0000000000000000000F /* FlameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B00000000000000000010 /* FlameView.swift */; };
+		EC0A00000000000000000010 /* SmokeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B00000000000000000011 /* SmokeView.swift */; };
+		EC0A00000000000000000011 /* ImmersiveChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B00000000000000000012 /* ImmersiveChrome.swift */; };
+		EC0A00000000000000000012 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B00000000000000000013 /* ButtonStyles.swift */; };
+		EC0A00000000000000000013 /* IdleTimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B00000000000000000014 /* IdleTimerController.swift */; };
+		EC0A00000000000000000014 /* SoftFeedbackPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B00000000000000000015 /* SoftFeedbackPlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +42,15 @@
 		EC0B0000000000000000000A /* BirthdayMusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayMusicPlayer.swift; sourceTree = "<group>"; };
 		EC0B0000000000000000000B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC0B0000000000000000000C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC0B0000000000000000000D /* CandleItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandleItem.swift; sourceTree = "<group>"; };
+		EC0B0000000000000000000E /* CandleLayoutMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandleLayoutMode.swift; sourceTree = "<group>"; };
+		EC0B0000000000000000000F /* AtmosphereBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtmosphereBackground.swift; sourceTree = "<group>"; };
+		EC0B00000000000000000010 /* FlameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlameView.swift; sourceTree = "<group>"; };
+		EC0B00000000000000000011 /* SmokeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeView.swift; sourceTree = "<group>"; };
+		EC0B00000000000000000012 /* ImmersiveChrome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveChrome.swift; sourceTree = "<group>"; };
+		EC0B00000000000000000013 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
+		EC0B00000000000000000014 /* IdleTimerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleTimerController.swift; sourceTree = "<group>"; };
+		EC0B00000000000000000015 /* SoftFeedbackPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoftFeedbackPlayer.swift; sourceTree = "<group>"; };
 		EC0C00000000000000000001 /* Ecandle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ecandle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -59,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				EC0B00000000000000000001 /* EcandleApp.swift */,
+				EC0E00000000000000000007 /* Models */,
 				EC0E00000000000000000004 /* Views */,
 				EC0E00000000000000000005 /* ViewModels */,
 				EC0E00000000000000000006 /* Services */,
@@ -83,8 +102,13 @@
 				EC0B00000000000000000003 /* ControlsPanel.swift */,
 				EC0B00000000000000000004 /* CakeSceneView.swift */,
 				EC0B00000000000000000005 /* CandleView.swift */,
+				EC0B0000000000000000000F /* AtmosphereBackground.swift */,
+				EC0B00000000000000000010 /* FlameView.swift */,
+				EC0B00000000000000000011 /* SmokeView.swift */,
+				EC0B00000000000000000012 /* ImmersiveChrome.swift */,
 				EC0B00000000000000000006 /* CelebrationOverlay.swift */,
 				EC0B00000000000000000007 /* ConfettiView.swift */,
+				EC0E00000000000000000008 /* Styles */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -102,8 +126,27 @@
 			children = (
 				EC0B00000000000000000009 /* BlowDetector.swift */,
 				EC0B0000000000000000000A /* BirthdayMusicPlayer.swift */,
+				EC0B00000000000000000014 /* IdleTimerController.swift */,
+				EC0B00000000000000000015 /* SoftFeedbackPlayer.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		EC0E00000000000000000007 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EC0B0000000000000000000D /* CandleItem.swift */,
+				EC0B0000000000000000000E /* CandleLayoutMode.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EC0E00000000000000000008 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				EC0B00000000000000000013 /* ButtonStyles.swift */,
+			);
+			path = Styles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,6 +229,15 @@
 				EC0A00000000000000000008 /* CandleViewModel.swift in Sources */,
 				EC0A00000000000000000009 /* BlowDetector.swift in Sources */,
 				EC0A0000000000000000000A /* BirthdayMusicPlayer.swift in Sources */,
+				EC0A0000000000000000000C /* CandleItem.swift in Sources */,
+				EC0A0000000000000000000D /* CandleLayoutMode.swift in Sources */,
+				EC0A0000000000000000000E /* AtmosphereBackground.swift in Sources */,
+				EC0A0000000000000000000F /* FlameView.swift in Sources */,
+				EC0A00000000000000000010 /* SmokeView.swift in Sources */,
+				EC0A00000000000000000011 /* ImmersiveChrome.swift in Sources */,
+				EC0A00000000000000000012 /* ButtonStyles.swift in Sources */,
+				EC0A00000000000000000013 /* IdleTimerController.swift in Sources */,
+				EC0A00000000000000000014 /* SoftFeedbackPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,8 +363,8 @@
 		EC1000000000000000000003 /* Build configuration list for PBXNativeTarget "Ecandle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EC1200000000000000000003 /* Debug */,
-				EC1200000000000000000004 /* Release */,
+				EC1200000000000000003 /* Debug */,
+				EC1200000000000000004 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -3,29 +3,6 @@ import Combine
 import Foundation
 import UIKit
 
-enum CandleLayoutMode: String, CaseIterable, Identifiable {
-    case count = "多根蜡烛"
-    case digits = "数字蜡烛"
-
-    var id: String { rawValue }
-}
-
-struct CandleItem: Identifiable, Equatable {
-    let id: UUID
-    let digitLabel: String?
-    var isLit: Bool
-    var isOut: Bool
-
-    init(id: UUID = UUID(), digitLabel: String? = nil, isLit: Bool = false, isOut: Bool = false) {
-        self.id = id
-        self.digitLabel = digitLabel
-        self.isLit = isLit
-        self.isOut = isOut
-    }
-
-    var isDigit: Bool { digitLabel != nil }
-}
-
 @MainActor
 final class CandleViewModel: ObservableObject {
     @Published var mode: CandleLayoutMode = .count
@@ -33,15 +10,30 @@ final class CandleViewModel: ObservableObject {
     @Published var age: Int = 18
     @Published var candles: [CandleItem] = []
     @Published var musicEnabled: Bool = true
+    @Published var softSoundEnabled: Bool = false
     @Published var micEnabled: Bool = false
     @Published var blowLevel: Double = 0
     @Published var showCelebration: Bool = false
     @Published var statusMessage: String = "先设置蜡烛，再点击「点燃蜡烛」"
     @Published var micPermissionDenied: Bool = false
+    /// Settings sheet visibility. Collapses automatically when entering blow mode.
+    @Published var isSettingsExpanded: Bool = true
 
     private let musicPlayer = BirthdayMusicPlayer()
+    private let softFeedback = SoftFeedbackPlayer()
     private let blowDetector = BlowDetector()
     private var blowCancellable: AnyCancellable?
+
+    var litCount: Int {
+        candles.filter { $0.isLit && !$0.isOut }.count
+    }
+
+    var isImmersive: Bool { !isSettingsExpanded }
+
+    var glowStrength: Double {
+        guard !candles.isEmpty else { return 0 }
+        return Double(litCount) / Double(candles.count)
+    }
 
     init() {
         rebuildCandles()
@@ -52,18 +44,35 @@ final class CandleViewModel: ObservableObject {
             }
     }
 
+    deinit {
+        // deinit is nonisolated; hop to main for UIKit.
+        DispatchQueue.main.async {
+            IdleTimerController.setActive(false)
+        }
+    }
+
     func rebuildCandles() {
         showCelebration = false
         candles = makeCandles()
+        refreshIdleTimer()
         updateStatus()
     }
 
     func lightAll() {
-        for index in candles.indices where !candles[index].isOut {
+        var didLight = false
+        for index in candles.indices where !candles[index].isOut && !candles[index].isLit {
             candles[index].isLit = true
+            didLight = true
+        }
+        if didLight, softSoundEnabled {
+            softFeedback.playIgnite(allowAudio: !micEnabled)
         }
         syncMusic()
+        refreshIdleTimer()
         updateStatus()
+        if micEnabled {
+            collapseSettingsForBlow()
+        }
     }
 
     func toggleLight(_ id: UUID) {
@@ -71,7 +80,11 @@ final class CandleViewModel: ObservableObject {
         guard !candles[index].isOut else { return }
         if !candles[index].isLit {
             candles[index].isLit = true
+            if softSoundEnabled {
+                softFeedback.playIgnite(allowAudio: !micEnabled)
+            }
             syncMusic()
+            refreshIdleTimer()
         }
         updateStatus()
     }
@@ -79,6 +92,22 @@ final class CandleViewModel: ObservableObject {
     func setMusicEnabled(_ enabled: Bool) {
         musicEnabled = enabled
         syncMusic()
+    }
+
+    func setSoftSoundEnabled(_ enabled: Bool) {
+        softSoundEnabled = enabled
+    }
+
+    func toggleSettings() {
+        isSettingsExpanded.toggle()
+    }
+
+    func expandSettings() {
+        isSettingsExpanded = true
+    }
+
+    func collapseSettingsForBlow() {
+        isSettingsExpanded = false
     }
 
     func toggleMic() async {
@@ -97,6 +126,8 @@ final class CandleViewModel: ObservableObject {
             try blowDetector.start()
             micEnabled = true
             updateStatus()
+            // Immersive blow: hide chrome so the candle fills the room.
+            collapseSettingsForBlow()
         } catch {
             statusMessage = "无法启动麦克风：\(error.localizedDescription)"
         }
@@ -115,6 +146,10 @@ final class CandleViewModel: ObservableObject {
         } else if !musicEnabled {
             musicPlayer.stop()
         }
+    }
+
+    private func refreshIdleTimer() {
+        IdleTimerController.setActive(litCount > 0)
     }
 
     private func makeCandles() -> [CandleItem] {
@@ -182,15 +217,22 @@ final class CandleViewModel: ObservableObject {
         guard let index = candles.firstIndex(where: { $0.isLit && !$0.isOut }) else { return }
         candles[index].isLit = false
         candles[index].isOut = true
+        candles[index].extinguishToken += 1
 
-        let generator = UIImpactFeedbackGenerator(style: .light)
-        generator.impactOccurred()
+        if softSoundEnabled {
+            softFeedback.playExtinguish(allowAudio: !micEnabled)
+        } else {
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.impactOccurred()
+        }
 
         if candles.allSatisfy(\.isOut) {
             musicPlayer.stop()
             showCelebration = true
-            let success = UINotificationFeedbackGenerator()
-            success.notificationOccurred(.success)
+            softFeedback.playCelebration()
+            IdleTimerController.setActive(false)
+        } else {
+            refreshIdleTimer()
         }
         updateStatus()
     }
