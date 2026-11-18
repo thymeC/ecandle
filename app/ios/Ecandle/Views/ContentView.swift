@@ -24,6 +24,7 @@ struct ContentView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .animation(.easeInOut(duration: 0.35), value: viewModel.isSettingsExpanded)
         .animation(.spring(duration: 0.5), value: viewModel.showCelebration)
+        .animation(.easeInOut(duration: 0.28), value: viewModel.showCake)
         .statusBarHidden(viewModel.isImmersive)
         .onChange(of: viewModel.mode) { _, _ in viewModel.rebuildCandles() }
         .onChange(of: viewModel.candleCount) { _, _ in
@@ -36,7 +37,7 @@ struct ContentView: View {
 
     private var setupLayout: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            VStack(spacing: 20) {
+            VStack(spacing: 18) {
                 header
                 ControlsPanel(viewModel: viewModel) {
                     withAnimation(.easeInOut(duration: 0.28)) {
@@ -46,6 +47,7 @@ struct ContentView: View {
                 CakeSceneView(
                     candles: viewModel.candles,
                     immersive: false,
+                    showCake: viewModel.showCake,
                     onTapCandle: { viewModel.toggleLight($0) }
                 )
                 Text(viewModel.statusMessage)
@@ -76,6 +78,7 @@ struct ContentView: View {
                 CakeSceneView(
                     candles: viewModel.candles,
                     immersive: true,
+                    showCake: viewModel.showCake,
                     onTapCandle: { viewModel.toggleLight($0) }
                 )
                 Spacer(minLength: 0)
@@ -89,16 +92,17 @@ struct ContentView: View {
     }
 
     private var header: some View {
-        VStack(spacing: 6) {
-            Text("电子生日蜡烛")
-                .font(.title.bold())
-            Text("没有打火机？点这里。对着 iPhone 吹气，蜡烛会灭。")
+        VStack(spacing: 8) {
+            Text("电子蜡烛")
+                .font(.system(size: 30, weight: .bold, design: .rounded))
+                .tracking(1)
+            Text("许愿 · 纪念 · 慢慢吹灭")
                 .font(.subheadline)
-                .foregroundStyle(.white.opacity(0.65))
+                .foregroundStyle(.white.opacity(0.58))
                 .multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
         }
         .frame(maxWidth: .infinity)
+        .padding(.top, 4)
     }
 }
 

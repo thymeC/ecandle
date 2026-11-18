@@ -4,7 +4,7 @@
 
 建议文件：
 
-- `app_icon_1024.png` — App Store / 门户卡片图标
+- `app_icon_1024.png` — App Store / 门户卡片图标（可爱生日蜡烛，已同步到 iOS `AppIcon`）
 - `app-store/marketing/` — 截图（可选）
 - `immersive-preview/` — SwiftUI 沉浸/设置态静态视觉预览（非模拟器）
 

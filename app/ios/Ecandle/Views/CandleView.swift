@@ -2,7 +2,7 @@ import SwiftUI
 
 struct CandleView: View {
     let candle: CandleItem
-    /// Optional uniform scale when many candles must fit on the cake.
+    /// Optional uniform scale when many candles must fit on the cake / tray.
     var scale: CGFloat = 1
 
     private var bodyWidth: CGFloat {
@@ -29,21 +29,21 @@ struct CandleView: View {
             // Fixed layout width so lit flame halos cannot inflate HStack / ScrollView.
             .frame(width: bodyWidth, height: 36)
 
+            // Wick darkens slightly when extinguished; wax color stays vivid.
             Rectangle()
-                .fill(Color.black.opacity(0.85))
+                .fill(candle.isOut ? Color.black.opacity(0.7) : Color.black.opacity(0.85))
                 .frame(width: 2, height: 6)
-                .opacity(candle.isOut ? 0.55 : 1)
 
             if candle.isDigit, let label = candle.digitLabel {
                 Text(label)
                     .font(.title2.bold())
-                    .foregroundStyle(.white.opacity(candle.isOut ? 0.55 : 1))
+                    .foregroundStyle(.white)
                     .frame(width: 28, height: 48)
                     .background(
                         LinearGradient(
                             colors: [
-                                Color.pink.opacity(candle.isOut ? 0.55 : 1),
-                                Color(red: 0.76, green: 0.09, blue: 0.36).opacity(candle.isOut ? 0.55 : 1),
+                                Color.pink,
+                                Color(red: 0.76, green: 0.09, blue: 0.36),
                             ],
                             startPoint: .top,
                             endPoint: .bottom
@@ -54,12 +54,7 @@ struct CandleView: View {
                 RoundedRectangle(cornerRadius: 2)
                     .fill(
                         LinearGradient(
-                            colors: [
-                                .white.opacity(candle.isOut ? 0.55 : 1),
-                                .pink.opacity(candle.isOut ? 0.55 : 1),
-                                .white.opacity(candle.isOut ? 0.55 : 1),
-                                .pink.opacity(candle.isOut ? 0.55 : 1),
-                            ],
+                            colors: [.white, .pink, .white, .pink],
                             startPoint: .top,
                             endPoint: .bottom
                         )
@@ -69,7 +64,7 @@ struct CandleView: View {
         }
         .frame(width: bodyWidth)
         .scaleEffect(scale, anchor: .bottom)
-        .frame(width: bodyWidth * scale, height: nil, alignment: .bottom)
+        .frame(width: bodyWidth * scale, alignment: .bottom)
         .animation(.easeInOut(duration: 0.4), value: candle.isLit)
         .animation(.easeInOut(duration: 0.45), value: candle.isOut)
     }

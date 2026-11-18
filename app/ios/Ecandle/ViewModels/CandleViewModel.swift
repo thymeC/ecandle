@@ -9,6 +9,7 @@ final class CandleViewModel: ObservableObject {
     @Published var candleCount: Int = 5
     @Published var age: Int = 18
     @Published var candles: [CandleItem] = []
+    @Published var showCake: Bool = true
     @Published var musicEnabled: Bool = true
     @Published var softSoundEnabled: Bool = false
     @Published var micEnabled: Bool = false
