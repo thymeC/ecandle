@@ -9,3 +9,9 @@
 - `immersive-preview/` — SwiftUI 沉浸/设置态静态视觉预览（非模拟器）
 
 digital-life 清单见：`digital-life-from-scratch/scripts/sync-media.mjs` 中的 `ecandle` 条目。
+
+## App Store
+
+- `app-store/promo-copy.md` — ASC 文案
+- `app-store/screenshots/` — iPhone 6.7" (1320×2868) 截图
+- `app_icon_1024.png` — 无透明通道的 1024 图标
