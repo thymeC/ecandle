@@ -27,6 +27,7 @@
 		EC0A00000000000000000012 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B00000000000000000013 /* ButtonStyles.swift */; };
 		EC0A00000000000000000013 /* IdleTimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B00000000000000000014 /* IdleTimerController.swift */; };
 		EC0A00000000000000000014 /* SoftFeedbackPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B00000000000000000015 /* SoftFeedbackPlayer.swift */; };
+		EC0A00000000000000000015 /* DigitCandleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B00000000000000000016 /* DigitCandleShape.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		EC0B00000000000000000013 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		EC0B00000000000000000014 /* IdleTimerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleTimerController.swift; sourceTree = "<group>"; };
 		EC0B00000000000000000015 /* SoftFeedbackPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoftFeedbackPlayer.swift; sourceTree = "<group>"; };
+		EC0B00000000000000000016 /* DigitCandleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitCandleShape.swift; sourceTree = "<group>"; };
 		EC0C00000000000000000001 /* Ecandle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ecandle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 				EC0B00000000000000000003 /* ControlsPanel.swift */,
 				EC0B00000000000000000004 /* CakeSceneView.swift */,
 				EC0B00000000000000000005 /* CandleView.swift */,
+				EC0B00000000000000000016 /* DigitCandleShape.swift */,
 				EC0B0000000000000000000F /* AtmosphereBackground.swift */,
 				EC0B00000000000000000010 /* FlameView.swift */,
 				EC0B00000000000000000011 /* SmokeView.swift */,
@@ -238,6 +241,7 @@
 				EC0A00000000000000000012 /* ButtonStyles.swift in Sources */,
 				EC0A00000000000000000013 /* IdleTimerController.swift in Sources */,
 				EC0A00000000000000000014 /* SoftFeedbackPlayer.swift in Sources */,
+				EC0A00000000000000000015 /* DigitCandleShape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,7 +263,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -278,7 +282,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -293,7 +297,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4CB3M95XQH;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Ecandle/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "电子蜡烛";
@@ -306,8 +310,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecandle.app;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = online.jingc.ecandle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -324,7 +328,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4CB3M95XQH;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Ecandle/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "电子蜡烛";
@@ -337,8 +341,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecandle.app;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = online.jingc.ecandle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -363,8 +367,8 @@
 		EC1000000000000000000003 /* Build configuration list for PBXNativeTarget "Ecandle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EC1200000000000000003 /* Debug */,
-				EC1200000000000000004 /* Release */,
+				EC1200000000000000000003 /* Debug */,
+				EC1200000000000000000004 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
