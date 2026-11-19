@@ -4,15 +4,16 @@ struct CakeSceneView: View {
     let candles: [CandleItem]
     var immersive: Bool = false
     var showCake: Bool = true
+    /// Smaller scene for the settings-screen preview half.
+    var compact: Bool = false
     let onTapCandle: (UUID) -> Void
 
     var body: some View {
         GeometryReader { geo in
-            let bounds = min(geo.size.width, immersive ? 360 : 340)
-            let plate = min(plateWidthIdeal, bounds)
+            let maxBound = compact ? min(geo.size.width, 300) : min(geo.size.width, immersive ? 360 : 340)
+            let plate = min(plateWidthIdeal, maxBound)
             let cake = min(cakeWidthIdeal, plate * 0.82)
-            // Without cake, candles can use a wider band for breathing room.
-            let candleBand = showCake ? cake * 0.96 : min(bounds * 0.92, plate)
+            let candleBand = showCake ? cake * 0.96 : min(maxBound * 0.92, plate)
             let layout = candleFit(in: candleBand)
 
             ZStack(alignment: .bottom) {
@@ -28,7 +29,7 @@ struct CakeSceneView: View {
                             endRadius: immersive ? 200 : 150
                         )
                     )
-                    .frame(width: min(bounds, immersive ? 360 : 300), height: immersive ? 120 : 90)
+                    .frame(width: min(maxBound, immersive ? 360 : 300), height: immersive ? 120 : (compact ? 70 : 90))
                     .offset(y: showCake ? (immersive ? 20 : 10) : (immersive ? -10 : -20))
                     .blur(radius: 18)
                     .allowsHitTesting(false)
@@ -42,10 +43,9 @@ struct CakeSceneView: View {
                                 endPoint: .bottom
                             )
                         )
-                        .frame(width: plate, height: 22)
+                        .frame(width: plate, height: compact ? 16 : 22)
                         .shadow(color: .black.opacity(0.45), radius: 12, y: 6)
                 } else {
-                    // Soft ground glow under free-standing candles.
                     Capsule()
                         .fill(
                             LinearGradient(
@@ -85,12 +85,12 @@ struct CakeSceneView: View {
                                         endPoint: .bottom
                                     )
                                 )
-                                .frame(width: cake, height: immersive ? 100 : 88)
+                                .frame(width: cake, height: cakeBodyHeight)
 
                             RoundedRectangle(cornerRadius: 12)
                                 .fill(Color(red: 1, green: 0.71, blue: 0.78))
-                                .frame(width: cake + 8, height: 26)
-                                .offset(y: -12)
+                                .frame(width: cake + 8, height: compact ? 20 : 26)
+                                .offset(y: compact ? -10 : -12)
                         }
                     }
                 }
@@ -103,19 +103,33 @@ struct CakeSceneView: View {
         .frame(height: sceneHeight)
     }
 
-    private var sceneHeight: CGFloat {
-        if showCake {
-            return immersive ? 340 : 280
-        }
-        return immersive ? 220 : 180
+    private var cakeBodyHeight: CGFloat {
+        if immersive { return 100 }
+        return compact ? 72 : 88
     }
 
-    private var plateWidthIdeal: CGFloat { immersive ? 340 : 320 }
-    private var cakeWidthIdeal: CGFloat { immersive ? 280 : 260 }
+    private var sceneHeight: CGFloat {
+        if showCake {
+            if immersive { return 340 }
+            return compact ? 220 : 280
+        }
+        if immersive { return 220 }
+        return compact ? 150 : 180
+    }
+
+    private var plateWidthIdeal: CGFloat {
+        if immersive { return 340 }
+        return compact ? 280 : 320
+    }
+
+    private var cakeWidthIdeal: CGFloat {
+        if immersive { return 280 }
+        return compact ? 230 : 260
+    }
 
     private func candleFit(in width: CGFloat) -> (spacing: CGFloat, scale: CGFloat) {
         let count = max(candles.count, 1)
-        let unit: CGFloat = candles.contains(where: \.isDigit) ? 28 : 10
+        let unit: CGFloat = candles.contains(where: \.isDigit) ? 68 : 12
         let preferredSpacing: CGFloat = {
             if count > 12 { return 2 }
             if count > 8 { return 4 }

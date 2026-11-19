@@ -15,16 +15,16 @@ struct SmokeView: View {
                 .opacity(emberOpacity)
                 .offset(y: -2)
 
-            TimelineView(.animation(minimumInterval: 1 / 30, paused: particles.isEmpty)) { timeline in
+            TimelineView(.animation(minimumInterval: 1.0 / 30.0, paused: particles.isEmpty)) { timeline in
                 Canvas { context, _ in
                     let now = timeline.date.timeIntervalSinceReferenceDate
                     for particle in particles {
                         let age = now - particle.birth
                         guard age < particle.lifetime else { continue }
                         let t = age / particle.lifetime
-                        let x = particle.origin.x + particle.drift * age
-                        let y = particle.origin.y - particle.rise * age
-                        let size = particle.size * (1 + t * 1.4)
+                        let x = particle.origin.x + particle.drift * CGFloat(age)
+                        let y = particle.origin.y - particle.rise * CGFloat(age)
+                        let size = particle.size * (1 + CGFloat(t) * 1.4)
                         var ctx = context
                         ctx.opacity = (1 - t) * 0.45
                         let rect = CGRect(x: x - size / 2, y: y - size / 2, width: size, height: size)

@@ -54,12 +54,30 @@ final class CandleViewModel: ObservableObject {
 
     func rebuildCandles() {
         showCelebration = false
+        stopMic()
         candles = makeCandles()
         refreshIdleTimer()
         updateStatus()
     }
 
-    func lightAll() {
+    /// After celebration: re-light and go straight back into blow mode.
+    func replayCelebration() {
+        showCelebration = false
+        stopMic()
+        candles = makeCandles()
+        Task { await lightAll() }
+    }
+
+    /// Leave celebration and return to settings.
+    func finishCelebrationToSetup() {
+        showCelebration = false
+        stopMic()
+        candles = makeCandles()
+        expandSettings()
+        updateStatus()
+    }
+
+    func lightAll() async {
         var didLight = false
         for index in candles.indices where !candles[index].isOut && !candles[index].isLit {
             candles[index].isLit = true
@@ -71,9 +89,10 @@ final class CandleViewModel: ObservableObject {
         syncMusic()
         refreshIdleTimer()
         updateStatus()
-        // Immersive after lighting — cake fills the room; settings reopen via tap / chrome.
+        // Immersive after lighting — mic on so you can blow right away.
         if didLight || litCount > 0 {
             collapseSettingsForBlow()
+            await enableMicForBlow()
         }
     }
 
@@ -87,6 +106,7 @@ final class CandleViewModel: ObservableObject {
             }
             syncMusic()
             refreshIdleTimer()
+            Task { await enableMicForBlow() }
         }
         updateStatus()
     }
@@ -112,26 +132,25 @@ final class CandleViewModel: ObservableObject {
         isSettingsExpanded = false
     }
 
-    func toggleMic() async {
-        if micEnabled {
-            stopMic()
-            return
-        }
+    /// Start mic listening (idempotent). Called automatically when candles are lit.
+    @discardableResult
+    func enableMicForBlow() async -> Bool {
+        if micEnabled { return true }
         let granted = await blowDetector.requestPermission()
         if !granted {
             micPermissionDenied = true
-            statusMessage = "请在「设置 → 隐私 → 麦克风」中允许 eCandle"
-            return
+            statusMessage = "请在「设置 → 隐私 → 麦克风」中允许电子蜡烛，才能吹灭蜡烛"
+            return false
         }
         micPermissionDenied = false
         do {
             try blowDetector.start()
             micEnabled = true
             updateStatus()
-            // Immersive blow: hide chrome so the candle fills the room.
-            collapseSettingsForBlow()
+            return true
         } catch {
             statusMessage = "无法启动麦克风：\(error.localizedDescription)"
+            return false
         }
     }
 
@@ -188,7 +207,9 @@ final class CandleViewModel: ObservableObject {
         }
         statusMessage = micEnabled
             ? "对着麦克风吹气，吹灭蜡烛吧！"
-            : "蜡烛都亮啦！开启「吹气」用麦克风吹灭"
+            : (micPermissionDenied
+                ? "需要麦克风权限才能吹灭，请到系统设置中开启"
+                : "蜡烛都亮啦！对着麦克风吹气即可熄灭")
     }
 
     private var blowAccum: TimeInterval = 0
@@ -230,9 +251,12 @@ final class CandleViewModel: ObservableObject {
 
         if candles.allSatisfy(\.isOut) {
             musicPlayer.stop()
+            stopMic()
             showCelebration = true
             softFeedback.playCelebration()
             IdleTimerController.setActive(false)
+            statusMessage = "全部熄灭啦！"
+            return
         } else {
             refreshIdleTimer()
         }

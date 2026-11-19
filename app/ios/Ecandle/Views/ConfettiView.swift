@@ -7,29 +7,44 @@ struct ConfettiView: View {
     @State private var particles: [ConfettiParticle] = []
     @State private var now: TimeInterval = Date.timeIntervalSinceReferenceDate
 
+    /// Stable publisher — do NOT recreate inside `body` (that freezes the app).
+    private let tick = Timer.publish(every: 1.0 / 60.0, on: .main, in: .common).autoconnect()
+
     var body: some View {
         Canvas { context, _ in
             for particle in particles {
                 let age = now - particle.birth
                 guard age < particle.lifetime else { continue }
                 let t = age / particle.lifetime
-                let x = particle.origin.x + particle.velocity.dx * age
-                let y = particle.origin.y + particle.velocity.dy * age + 180 * age * age
-                let rect = CGRect(x: x, y: y, width: particle.size, height: particle.size * 0.6)
+                let x = particle.origin.x + particle.velocity.dx * CGFloat(age)
+                let y = particle.origin.y + particle.velocity.dy * CGFloat(age) + CGFloat(180 * age * age)
+                let rect = CGRect(
+                    x: x,
+                    y: y,
+                    width: particle.size,
+                    height: particle.size * 0.6
+                )
                 var ctx = context
                 ctx.opacity = 1 - t
                 ctx.fill(Path(roundedRect: rect, cornerRadius: 1), with: .color(particle.color))
             }
         }
         .ignoresSafeArea()
-        .onReceive(Timer.publish(every: 1.0 / 60.0, on: .main, in: .common).autoconnect()) { date in
-            guard isActive else { return }
+        .allowsHitTesting(false)
+        .onReceive(tick) { date in
+            guard isActive, !particles.isEmpty else { return }
             now = date.timeIntervalSinceReferenceDate
+            // Drop finished particles so we stop redrawing eventually.
+            let cutoff = now - 3.0
+            if particles.contains(where: { $0.birth < cutoff }) {
+                particles.removeAll { $0.birth < cutoff }
+            }
         }
         .onChange(of: isActive) { _, active in
             if active {
                 spawn()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                    guard isActive else { return }
                     spawn(intensity: 0.6)
                 }
             } else {
@@ -40,10 +55,9 @@ struct ConfettiView: View {
 
     private func spawn(intensity: Double = 1) {
         let colors: [Color] = [.pink, .yellow, .purple, .mint, .orange, .white]
-        let w = UIScreen.main.bounds.width
-        let h = UIScreen.main.bounds.height
-        let origin = CGPoint(x: w * 0.5, y: h * 0.35)
-        let count = Int(120 * intensity)
+        let bounds = UIScreen.main.bounds
+        let origin = CGPoint(x: bounds.width * 0.5, y: bounds.height * 0.35)
+        let count = Int(80 * intensity)
         let birth = Date.timeIntervalSinceReferenceDate
         particles.append(contentsOf: (0..<count).map { _ in
             ConfettiParticle(
